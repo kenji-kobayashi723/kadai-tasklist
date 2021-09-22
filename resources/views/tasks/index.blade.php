@@ -25,6 +25,10 @@
         </table>
     @endif
     
-    {!! link_to_route('tasks.create', '新規タスクの投稿', [], ['class' => 'btn btn-primary']) !!}
+    @if (Auth::check())
+        {!! link_to_route('tasks.create', '新規タスクの投稿', [], ['class' => 'btn btn-primary']) !!}
+    @else
+    
+    @endif
 
 @endsection
