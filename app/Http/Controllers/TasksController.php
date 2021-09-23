@@ -15,18 +15,17 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $data = [];
-        if (\Auth::check()) { 
+        if (\Auth::check()) {
             $user = \Auth::user();
 
-            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
-
-            $data = $user->tasks;
+            $tasks = $user->tasks()->orderBy('created_at', 'asc')->paginate(10);
+            
+            return view('tasks.index', [
+                'tasks' => $tasks,    
+            ]);
+        } else {
+            return view('welcome');
         }
-        
-        return view('tasks.index', [
-            'tasks' => $data,    
-        ]);
     }
 
     /**
